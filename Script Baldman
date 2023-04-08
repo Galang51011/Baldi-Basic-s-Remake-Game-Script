@@ -1,0 +1,280 @@
+game.Players.LocalPlayer.CameraMode = "Classic"
+game.Players.LocalPlayer.CameraMaxZoomDistance = 10
+game.Players.LocalPlayer.CameraMinZoomDistance = 0.5
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Baldi's Basics Remake Game", "DarkTheme")
+local Tab = Window:NewTab("Player")
+local Section = Tab:NewSection("Staminometer")
+Section:NewToggle("Infinite Stamina", "Speed", function(state)
+    if state then
+        game:GetService("Players").SGOJSFIHHSIJHIS.Stamina.Value = math.huge
+    else
+        game:GetService("Players").SGOJSFIHHSIJHIS.Stamina.Value = 100
+    end
+end)
+Section:NewSlider("Normal Speed", "NS", 250, 10, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.PlayerGui.Sprinting.NormalSpeed.Value = s
+end)
+Section:NewSlider("Run Speed", "NS", 250, 10, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.PlayerGui.Sprinting.RunSpeed.Value = s
+end)
+local Tab = Window:NewTab("Misc")
+local Section = Tab:NewSection("Visual")
+Section:NewToggle("Esp", "Show all", function(state)
+    if state then
+        for i,v in pairs(game.Workspace:GetDescendants()) do
+            if v.ClassName == 'BillboardGui' and v.Parent.Name == 'HumanoidRootPart' and v.Parent.Parent.ClassName == 'Model' then
+        local BillboardGui = Instance.new("BillboardGui")
+        local TextLabel = Instance.new("TextLabel")
+        BillboardGui.Name = "EZ"
+        BillboardGui.Parent = v.Parent -- what the billboardgui goes into
+        BillboardGui.AlwaysOnTop = true -- if its on top or not
+        BillboardGui.Size = UDim2.new(0, 50, 0, 50) -- size of it
+        BillboardGui.StudsOffset = Vector3.new(0,5,0)
+        
+        TextLabel.Parent = BillboardGui -- putting textlabel into billboardgui
+        TextLabel.BackgroundColor3 = Color3.new(1,100,100) -- color
+        TextLabel.BackgroundTransparency = 1 -- transparency
+        TextLabel.Size = UDim2.new(2, 5, 2, 5) -- size
+        TextLabel.Text = v.Parent.Parent.Name -- what the label says
+        TextLabel.TextColor3 = Color3.new(1, 255, 0) -- color
+        TextLabel.TextScaled = true -- if the text is scaled or not
+    end
+    end
+    else
+        for i,v in pairs(game.Workspace:GetDescendants()) do
+    if v.Name == 'EZ' and v.Parent.Name == 'HumanoidRootPart' and v.Parent.Parent.ClassName == 'Model' then
+        v:Destroy()
+    end
+    end
+    end
+end)
+
+local Tab = Window:NewTab("Giver Tool")
+local Section = Tab:NewSection("Giver Tool")
+Section:NewButton("BSoda", "Get BSoda", function()
+    local Tool = Instance.new("Tool")
+    local Handle = Instance.new("Part")
+
+    Tool.Name = "BCola Mod"
+    Tool.Parent = game.Players.LocalPlayer.Backpack
+    Tool.TextureId = "rbxassetid://8213674225"
+    Tool.Activated:Connect(function()
+    local Sound = Instance.new("Sound")
+    Sound.Name = "Splat"
+    Sound.Parent = Handle
+    Sound.SoundId = "rbxassetid://2266439003"
+    Sound.Volume = 0.5
+    Sound.PlayOnRemove = true
+    Sound:Play()
+    Sound:Destroy()
+    Tool:Destroy()
+    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("SodaRemote"):InvokeServer(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart)
+    
+    end)
+    Handle.Name = "Handle"
+    Handle.Parent = Tool
+    Handle.Transparency = 1
+    Handle.Anchored = false
+    Handle.CanCollide = false
+
+
+
+
+end)
+Section:NewButton("Inf BSoda", "Get Inf BSoda", function()
+    local Tool = Instance.new("Tool")
+    local Handle = Instance.new("Part")
+
+    Tool.Name = "Infinite BCola Mod"
+    Tool.Parent = game.Players.LocalPlayer.Backpack
+    Tool.TextureId = "rbxassetid://8213674225"
+    Tool.Activated:Connect(function()
+    local Sound = Instance.new("Sound")
+    Sound.Name = "Splat"
+    Sound.Parent = Handle
+    Sound.SoundId = "rbxassetid://2266439003"
+    Sound.Volume = 0.5
+    Sound.PlayOnRemove = true
+    Sound:Play()
+    Sound:Destroy()
+    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("SodaRemote"):InvokeServer(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart)
+    
+    end)
+    Handle.Name = "Handle"
+    Handle.Parent = Tool
+    Handle.Transparency = 1
+    Handle.Anchored = false
+    Handle.CanCollide = false
+end)
+Section:NewButton("Blaster BSoda", "Get Blaster BSoda", function()
+    local Tool = Instance.new("Tool")
+    local Handle = Instance.new("Part")
+
+    Tool.Name = "Blaster BCola Mod"
+    Tool.Parent = game.Players.LocalPlayer.Backpack
+    Tool.TextureId = "rbxassetid://7060325425"
+    Tool.Activated:Connect(function()
+    local Sound = Instance.new("Sound")
+    local Time = 1
+    Sound.Name = "Splat"
+    Sound.Parent = Handle
+    Sound.SoundId = "rbxassetid://345052019"
+    Sound.Volume = 1.5
+    Sound.PlayOnRemove = true
+    Sound:Play()
+    Wait(0.8)
+    while Time < 8 do
+    wait(0.04)
+    Time = Time + 1
+    game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("SodaRemote"):InvokeServer(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart)
+    end
+    Sound:Destroy()
+    end)
+    Handle.Name = "Handle"
+    Handle.Parent = Tool
+    Handle.Transparency = 1
+    Handle.Anchored = false
+    Handle.CanCollide = false
+end)
+Section:NewButton("Grapple Hook", "Get Grapple Hook", function()
+    local Tool = Instance.new("Tool")
+    local Handle = Instance.new("Part")
+
+    Tool.Name = "Grapple Hook Mod"
+    Tool.Parent = game.Players.LocalPlayer.Backpack
+    Tool.TextureId = "rbxassetid://10570660833"
+    Tool.Activated:Connect(function()
+        game:GetService("ReplicatedStorage").Remotes.GrappleRemote:FireServer()
+        Tool:Destroy()
+    end)
+    Handle.Name = "Handle"
+    Handle.Parent = Tool
+    Handle.Transparency = 1
+    Handle.Anchored = false
+    Handle.CanCollide = false
+end)
+Section:NewButton("Infinite Grapple Hook", "Get Infinite Grapple Hook", function()
+    local Tool = Instance.new("Tool")
+    local Handle = Instance.new("Part")
+
+    Tool.Name = "Infinite Grapple Hook Mod"
+    Tool.Parent = game.Players.LocalPlayer.Backpack
+    Tool.TextureId = "rbxassetid://10570660833"
+    Tool.Activated:Connect(function()
+        game:GetService("ReplicatedStorage").Remotes.GrappleRemote:FireServer()
+    end)
+    Handle.Name = "Handle"
+    Handle.Parent = Tool
+    Handle.Transparency = 1
+    Handle.Anchored = false
+    Handle.CanCollide = false
+end)
+Section:NewButton("Dirty Chalk Eraser", "Get Dirty Chalk Eraser", function()
+    local Tool = Instance.new("Tool")
+    local Handle = Instance.new("Part")
+
+    Tool.Name = "Dirty Chalk Eraser Mod"
+    Tool.Parent = game.Players.LocalPlayer.Backpack
+    Tool.TextureId = "rbxassetid://8216981401"
+    Tool.Activated:Connect(function()
+        game:GetService("ReplicatedStorage").Remotes.EraserRemote:InvokeServer(game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart"))
+        Tool:Destroy()
+    end)
+    Handle.Name = "Handle"
+    Handle.Parent = Tool
+    Handle.Transparency = 1
+    Handle.Anchored = false
+    Handle.CanCollide = false
+end)
+Section:NewButton("Infinite Dirty Chalk Eraser", "Get Infinite Dirty Chalk Eraser", function()
+    local Tool = Instance.new("Tool")
+    local Handle = Instance.new("Part")
+
+    Tool.Name = "Infinite Dirty Chalk Eraser Mod"
+    Tool.Parent = game.Players.LocalPlayer.Backpack
+    Tool.TextureId = "rbxassetid://8216981401"
+    Tool.Activated:Connect(function()
+        game:GetService("ReplicatedStorage").Remotes.EraserRemote:InvokeServer(game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart"))
+    end)
+    Handle.Name = "Handle"
+    Handle.Parent = Tool
+    Handle.Transparency = 1
+    Handle.Anchored = false
+    Handle.CanCollide = false
+end)
+Section:NewButton("Infinite Principal Whistle Eraser", "Get Infinite Dirty Chalk Eraser", function()
+    local Tool = Instance.new("Tool")
+    local Handle = Instance.new("Part")
+
+    Tool.Name = "Infinite Principal Whistle Mod"
+    Tool.Parent = game.Players.LocalPlayer.Backpack
+    Tool.TextureId = "rbxassetid://8216980204"
+    Tool.Activated:Connect(function()
+        local Sound = Instance.new("Sound")
+        Sound.Name = "Yum1"
+        Sound.Parent = Handle
+        Sound.SoundId = "rbxassetid://8287643541"
+        Sound.Volume = 0.5
+        Sound.PlayOnRemove = true
+        Sound:Play()
+        Sound:Destroy()
+        game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("WhistleRemote"):InvokeServer(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart)
+    end)
+    Handle.Name = "Handle"
+    Handle.Parent = Tool
+    Handle.Transparency = 1
+    Handle.Anchored = false
+    Handle.CanCollide = false
+end)
+Section:NewButton("Infinite DoorLock", "Get Infinite DoorLock", function()
+    local Tool = Instance.new("Tool")
+    local Handle = Instance.new("Part")
+
+    Tool.Name = "Infinite DoorLock Mod"
+    Tool.Parent = game.Players.LocalPlayer.Backpack
+    Tool.TextureId = "rbxassetid://8213677001"
+    Tool.Activated:Connect(function()
+        game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("ClockRemote"):InvokeServer(workspace.School.GameStuff:FindFirstChild("TAPE PLAYER"))
+    end)
+    Handle.Name = "Handle"
+    Handle.Parent = Tool
+    Handle.Transparency = 1
+    Handle.Anchored = false
+    Handle.CanCollide = false
+end)
+Section:NewButton("Infinite Principal Whistle Eraser", "Get Infinite Dirty Chalk Eraser", function()
+    local Tool = Instance.new("Tool")
+    local Handle = Instance.new("Part")
+
+    Tool.Name = "Infinite Principal Whistle Mod"
+    Tool.Parent = game.Players.LocalPlayer.Backpack
+    Tool.TextureId = "rbxassetid://8216980204"
+    Tool.Activated:Connect(function()
+        local Sound = Instance.new("Sound")
+        Sound.Name = "Yum1"
+        Sound.Parent = Handle
+        Sound.SoundId = "rbxassetid://8287643541"
+        Sound.Volume = 0.5
+        Sound.PlayOnRemove = true
+        Sound:Play()
+        Sound:Destroy()
+        game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("WhistleRemote"):InvokeServer(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart)
+    end)
+    Handle.Name = "Handle"
+    Handle.Parent = Tool
+    Handle.Transparency = 1
+    Handle.Anchored = false
+    Handle.CanCollide = false
+end)
+
+local Tab = Window:NewTab("Setting")
+local Section = Tab:NewSection("Setting")
+Section:NewKeybind("Toggle UI", "Set Toggle Keybind UI", Enum.KeyCode.RightControl, function()
+	Library:ToggleUI()
+    game.Players.LocalPlayer.CameraMode = "Classic"
+    game.Players.LocalPlayer.CameraMaxZoomDistance = 10
+    game.Players.LocalPlayer.CameraMinZoomDistance = 0.5
+
+end)
